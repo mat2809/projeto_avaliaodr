@@ -1,33 +1,30 @@
 import tkinter as tk
 from tkinter import messagebox
-from app.controllers.usuario_controller import UsuarioController
 
 class LoginView:
-    def __init__(self, master):
+    def __init__(self, master, callback_login_sucesso):
         self.master = master
-        master.title("Login")
+        self.callback_login_sucesso = callback_login_sucesso
 
-        self.label_usuario = tk.Label(master, text="Usuário:")
-        self.label_usuario.pack()
+        tk.Label(master, text="Login", font=("Arial", 14)).pack(pady=10)
 
+        tk.Label(master, text="Usuário").pack()
         self.entry_usuario = tk.Entry(master)
         self.entry_usuario.pack()
 
-        self.label_senha = tk.Label(master, text="Senha:")
-        self.label_senha.pack()
-
+        tk.Label(master, text="Senha").pack()
         self.entry_senha = tk.Entry(master, show="*")
         self.entry_senha.pack()
 
-        self.btn_login = tk.Button(master, text="Entrar", command=self.login)
-        self.btn_login.pack()
+        tk.Button(master, text="Entrar", command=self.login).pack(pady=10)
 
     def login(self):
-        nome = self.entry_usuario.get()
+        usuario = self.entry_usuario.get()
         senha = self.entry_senha.get()
 
-        controller = UsuarioController()
-        if controller.autenticar(nome, senha):
-            messagebox.showinfo("Sucesso", "Login realizado com sucesso!")
+        # Aqui você pode chamar UsuarioController para autenticar
+        if usuario == "admin" and senha == "123":  # Simulação
+            messagebox.showinfo("Sucesso", "Login bem-sucedido!")
+            self.callback_login_sucesso()
         else:
-            messagebox.showerror("Erro", "Usuário ou senha inválidos.")
+            messagebox.showerror("Erro", "Usuário ou senha incorretos.")
