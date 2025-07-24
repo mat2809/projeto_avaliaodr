@@ -1,0 +1,72 @@
+# Documento Explicativo do DER - Sistema de Controle de Loja
+
+## Entidades e Relacionamentos
+
+### 1. USUÁRIOS
+- id (PK)
+- nome
+- senha
+> Usuários que acessam o sistema e realizam operações de cadastro e vendas.
+
+---
+
+### 2. CLIENTES
+- id (PK)
+- nome
+- email
+> Representam os clientes da loja que realizarão compras.
+
+---
+
+### 3. PRODUTOS
+- id (PK)
+- nome
+- preco
+- estoque
+> Produtos disponíveis para venda na loja.
+
+---
+
+### 4. VENDAS
+- id (PK)
+- cliente_id (FK → clientes.id)
+- data_venda
+- total
+> Registros de vendas realizadas, vinculadas a um cliente.
+
+Relacionamento:
+- Um cliente pode ter muitas vendas (1:N)
+- Uma venda pertence a apenas um cliente
+
+---
+
+### 5. ITENS_VENDA
+- id (PK)
+- venda_id (FK → vendas.id)
+- produto_id (FK → produtos.id)
+- quantidade
+- preco_unitario
+> Itens vendidos em cada venda, vinculando produtos e vendas.
+
+Relacionamento:
+- Uma venda pode ter vários itens (1:N)
+- Um produto pode estar em vários itens de venda (1:N)
+- Tabela de relacionamento entre `vendas` e `produtos`
+
+---
+
+## Relacionamentos Gerais
+- Um cliente realiza muitas vendas → vendas(cliente_id)
+- Uma venda contém muitos itens → itens_venda(venda_id)
+- Um produto pode aparecer em vários itens_venda → itens_venda(produto_id)
+- Um usuário realiza ações no sistema (não diretamente ligado ao DER, mas usado para login)
+
+---
+
+## Observações
+- Todas as chaves primárias são do tipo INT AUTO_INCREMENT.
+- Os relacionamentos são implementados via chaves estrangeiras.
+- O modelo segue a normalização para evitar redundâncias.
+- O DER gráfico está disponível em: `docs/modelo_banco.png`.
+
+# Fim do Documento
