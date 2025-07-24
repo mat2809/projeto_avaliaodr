@@ -14,6 +14,5 @@ Sistema desktop para controle de loja usando Python, Tkinter, MVC e MySQL.
 - `views/`: janelas da aplicação
 - `controllers/`: lógica de controle
 - `database/`: conexão e scripts SQL
-
 ## 🔐 Configuração
 Crie um `.env` com os dados:
